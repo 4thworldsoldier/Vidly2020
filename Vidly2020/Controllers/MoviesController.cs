@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Vidly2020.Models;
+using Vidly2020.ViewModels;
 
 namespace Vidly2020.Controllers
 {
@@ -31,7 +32,17 @@ namespace Vidly2020.Controllers
         public ActionResult Random()
         {
             var movie = new Movie() { Name = "shrek!" };
-            return View(movie);
+            var customers = new List<Customer>
+            {
+                new Customer{Name = "Customer 1"},
+                new Customer{Name = "Customer 2"}
+            };
+            var viewmodel = new RandomMovieViewModels
+            {
+                Movie = movie,
+                Customers = customers
+            };
+            return View(viewmodel);
         }
 
     }
