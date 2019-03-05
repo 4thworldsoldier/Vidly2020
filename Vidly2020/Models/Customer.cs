@@ -16,5 +16,6 @@ namespace Vidly2020.Models
         //nav prop from one type to its related types
         public MembershipType MembershipType { get; set; }
         public byte MembershipTypeId { get; set; }
+        public DateTime? Birthdate { get; set; }
     }
 }
