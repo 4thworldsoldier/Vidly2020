@@ -15,7 +15,11 @@ namespace Vidly2020.Models
         public bool  IsSubscribedToNewsLetter { get; set; }
         //nav prop from one type to its related types
         public MembershipType MembershipType { get; set; }
+
+        [Display(Name = "Membership Type")]
         public byte MembershipTypeId { get; set; }
+
+        [Display(Name ="Date of Birthday")]
         public DateTime? Birthdate { get; set; }
     }
 }
