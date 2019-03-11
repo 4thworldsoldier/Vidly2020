@@ -38,7 +38,7 @@ namespace Vidly2020.Controllers
             return View(customer);
         }
         //form method
-        public ActionResult CustomerForm()
+        public ActionResult New()
         {
             var membershiptypes = _context.MembershipTypes.ToList();
 
