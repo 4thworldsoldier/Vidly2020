@@ -9,9 +9,11 @@ namespace Vidly2020.Models
     public class Customer
     {
         public int Id { get; set; }
-        [Required]
+
+        [Required(ErrorMessage ="Please enter a validate name")]
         [StringLength(255)]
         public string Name { get; set; }
+
         public bool  IsSubscribedToNewsLetter { get; set; }
         //nav prop from one type to its related types
         public MembershipType MembershipType { get; set; }
@@ -20,6 +22,7 @@ namespace Vidly2020.Models
         public byte MembershipTypeId { get; set; }
 
         [Display(Name ="Date of Birthday")]
-        public DateTime? Birthdate { get; set; }
+        [Min18YearsIfAMember]
+        public DateTime ? Birthdate { get; set; }
     }
 }

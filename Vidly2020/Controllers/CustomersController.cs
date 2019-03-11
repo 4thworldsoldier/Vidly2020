@@ -52,6 +52,16 @@ namespace Vidly2020.Controllers
         [HttpPost]//model binding maps the body of the request in dis case a form to the parameter of the method
         public ActionResult Save(Customer customer)
         {
+            if (!ModelState.IsValid)
+            {
+                var viewmodel = new CustomerFormViewModel
+                {
+                    Customer = customer,
+                    MembershipTypes = _context.MembershipType.ToList()
+                };
+                return View("CustomerForm", viewmodel);
+              
+            }
             if (customer.Id == 0)
                 _context.Customers.Add(customer);
             else
@@ -63,7 +73,7 @@ namespace Vidly2020.Controllers
                 customerInDb.IsSubscribedToNewsLetter = customer.IsSubscribedToNewsLetter;
             }
             _context.SaveChanges();
-            return RedirectToAction("Index", "Customers");
+            return RedirectToAction("Index","Customers");
         }
 
         public ActionResult Edit(int id)
