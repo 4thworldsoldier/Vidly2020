@@ -40,16 +40,18 @@ namespace Vidly2020.Controllers
         //form method
         public ActionResult CustomerForm()
         {
-            var membershiptypes = _context.MembershipType.ToList();
+            var membershiptypes = _context.MembershipTypes.ToList();
 
             var viewmodel = new CustomerFormViewModel
             {
+                Customer = new Customer(),
                 MembershipTypes = membershiptypes
             };
 
             return View("CustomerForm",viewmodel);
         }
         [HttpPost]//model binding maps the body of the request in dis case a form to the parameter of the method
+        [ValidateAntiForgeryToken]
         public ActionResult Save(Customer customer)
         {
             if (!ModelState.IsValid)
@@ -57,7 +59,7 @@ namespace Vidly2020.Controllers
                 var viewmodel = new CustomerFormViewModel
                 {
                     Customer = customer,
-                    MembershipTypes = _context.MembershipType.ToList()
+                    MembershipTypes = _context.MembershipTypes.ToList()
                 };
                 return View("CustomerForm", viewmodel);
               
@@ -73,6 +75,7 @@ namespace Vidly2020.Controllers
                 customerInDb.IsSubscribedToNewsLetter = customer.IsSubscribedToNewsLetter;
             }
             _context.SaveChanges();
+
             return RedirectToAction("Index","Customers");
         }
 
@@ -84,7 +87,7 @@ namespace Vidly2020.Controllers
             var viewmodel = new CustomerFormViewModel
             {
                 Customer = customer,
-                MembershipTypes = _context.MembershipType.ToList()
+                MembershipTypes = _context.MembershipTypes.ToList()
             };
             return View("CustomerForm", viewmodel);
         }
