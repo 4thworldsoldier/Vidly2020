@@ -5,6 +5,8 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Vidly2020.Models;
+using Vidly2020.Dtos;
+using AutoMapper;
 
 namespace Vidly2020.Controllers.api
 {
@@ -16,34 +18,36 @@ namespace Vidly2020.Controllers.api
             _context = new ApplicationDbContext();
         }
         //Get /api/customers
-        public IEnumerable<Customer> GetCustomers()
+        public IEnumerable<CustomerDto> GetCustomers()
         {
-            return _context.Customers.ToList();
+            return _context.Customers.ToList().Select(Mapper.Map<Customer,CustomerDto>);
         }
         //GET /api/customers
-        public Customer GetCustomer(int id)
+        public CustomerDto GetCustomer(int id)
         {
             var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
 
             if (customer == null)
                 throw new HttpResponseException(HttpStatusCode.NotFound);
 
-            return customer;
+            return Mapper.Map<Customer,CustomerDto>(customer);
         }
         //POST /api/customer
         [HttpPost]
-        public Customer CreateCustomer(Customer customer)
+        public IHttpActionResult CreateCustomer(CustomerDto customerDto)
         {
             if (!ModelState.IsValid)
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+                return BadRequest();
+            var customer = Mapper.Map<CustomerDto, Customer>(customerDto);
             _context.Customers.Add(customer);
             _context.SaveChanges();
+            customerDto.Id = customer.Id;
 
-            return customer;
+            return Created(new Uri(Request.RequestUri + "/" + customer.Id),customerDto);
         }
         //
         [HttpPut]
-        public void UpdateCustomer(int id, Customer customer)
+        public void UpdateCustomer(int id, CustomerDto customerDto)
         {
             if (!ModelState.IsValid)
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
@@ -51,10 +55,8 @@ namespace Vidly2020.Controllers.api
 
             if (customerInDb == null)
                 throw new HttpResponseException(HttpStatusCode.NotFound);
-            customerInDb.Name = customer.Name;
-            customerInDb.Birthdate = customer.Birthdate;
-            customerInDb.MembershipTypeId = customer.MembershipTypeId;
-            customerInDb.IsSubscribedToNewsLetter = customer.IsSubscribedToNewsLetter;
+
+            Mapper.Map(customerDto, customerInDb);
             _context.SaveChanges();
         }
         //DELETE /api/customers/1
