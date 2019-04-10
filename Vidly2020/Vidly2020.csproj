@@ -241,6 +241,14 @@
     <Compile Include="Migrations\201903051453354_populateGenre.Designer.cs">
       <DependentUpon>201903051453354_populateGenre.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904091239551_seedUsers.cs" />
+    <Compile Include="Migrations\201904091239551_seedUsers.Designer.cs">
+      <DependentUpon>201904091239551_seedUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904100813317_AddDrivingLicenseToApplicationUser.cs" />
+    <Compile Include="Migrations\201904100813317_AddDrivingLicenseToApplicationUser.Designer.cs">
+      <DependentUpon>201904100813317_AddDrivingLicenseToApplicationUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -250,6 +258,7 @@
     <Compile Include="Models\MembershipType.cs" />
     <Compile Include="Models\Min18YearsIfAMember.cs" />
     <Compile Include="Models\Movie.cs" />
+    <Compile Include="Models\RoleName.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\CustomerFormViewModel.cs" />
@@ -495,6 +504,7 @@
     <Content Include="Views\Movies\Details.cshtml" />
     <Content Include="Views\Customers\CustomerForm.cshtml" />
     <Content Include="Views\Movies\MovieForm.cshtml" />
+    <Content Include="Views\Movies\ReadOnlyList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -542,6 +552,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903051453354_populateGenre.resx">
       <DependentUpon>201903051453354_populateGenre.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904091239551_seedUsers.resx">
+      <DependentUpon>201904091239551_seedUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904100813317_AddDrivingLicenseToApplicationUser.resx">
+      <DependentUpon>201904100813317_AddDrivingLicenseToApplicationUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

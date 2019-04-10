@@ -25,6 +25,7 @@ namespace Vidly2020.Models
 
     public class VerifyCodeViewModel
     {
+
         [Required]
         public string Provider { get; set; }
 
@@ -64,6 +65,10 @@ namespace Vidly2020.Models
 
     public class RegisterViewModel
     {
+        [Required]
+        [Display(Name = "Driving License")]
+        public string DrivingLicense { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
